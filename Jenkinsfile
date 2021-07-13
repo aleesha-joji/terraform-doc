@@ -10,7 +10,7 @@ pipeline {
             steps {
                 sh 'cat /etc/os-release'
                 sh 'terraform init'
-                sh 'tarraform get'
+                sh 'terraform get'
                 sh 'terraform plan'
             }
         }
