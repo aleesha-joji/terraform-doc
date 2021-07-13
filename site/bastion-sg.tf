@@ -24,7 +24,7 @@ resource "aws_security_group" "bastion_ssh_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   vpc_id = "${aws_vpc.default.id}"
-  tags {
+  tags = {
       Name = "terraform_bastion_ssh"
   }
 }
