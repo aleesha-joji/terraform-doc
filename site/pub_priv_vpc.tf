@@ -11,15 +11,15 @@
 resource "aws_vpc" "default" {
   cidr_block = "${var.vpc_cidr}"
   enable_dns_hostnames = true
-  tags {
+  tags = {
       Name = "terraform_vpc"
   }
 }
 
 resource "aws_internet_gateway" "default" {
   vpc_id = "${aws_vpc.default.id}"
-  tags {
-      Name = "terraform_igw"
+  tags = {
+    Name = "terraform_igw"
   }
 }
 output "vpc_id" {
@@ -38,7 +38,7 @@ resource "aws_instance" "nat" {
   subnet_id = "${aws_subnet.demo_public.id}"
   associate_public_ip_address = true
   source_dest_check = false
-  tags {
+  tags = {
       Name = "terraform_nat_instance"
   }
 }
@@ -55,7 +55,7 @@ resource "aws_subnet" "demo_public" {
   vpc_id = "${aws_vpc.default.id}"
   cidr_block = "${var.public_subnet_cidr}"
   availability_zone = "${element(var.availability_zones, 0)}"
-  tags {
+  tags = {
       Name = "terraform_public_subnet"
   }
 }
@@ -69,7 +69,7 @@ resource "aws_route_table" "demo_public" {
       cidr_block = "0.0.0.0/0"
       gateway_id = "${aws_internet_gateway.default.id}"
   }
-  tags {
+  tags = {
       Name = "terraform_public_subnet_route_table"
   }
 }
@@ -86,7 +86,7 @@ resource "aws_subnet" "demo_private" {
   vpc_id = "${aws_vpc.default.id}"
   cidr_block = "${var.private_subnet_cidr}"
   availability_zone = "${element(var.availability_zones, 0)}"
-  tags {
+  tags = {
       Name = "terraform_private_subnet"
   }
 }
@@ -100,7 +100,7 @@ resource "aws_route_table" "demo_private" {
       cidr_block = "0.0.0.0/0"
       instance_id = "${aws_instance.nat.id}"
   }
-  tags {
+  tags = {
       Name = "terraform_private_subnet_route_table"
   }
 }

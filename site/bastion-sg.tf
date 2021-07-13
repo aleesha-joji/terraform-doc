@@ -45,7 +45,7 @@ resource "aws_security_group" "ssh_from_bastion_sg" {
     ]
   }
   vpc_id = "${aws_vpc.default.id}"
-  tags {
+  tags = {
       Name = "terraform_ssh_from_bastion"
   }
 }
