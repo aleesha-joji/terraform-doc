@@ -10,13 +10,16 @@ pipeline {
             steps {
                 sh 'cat /etc/os-release'
                 sh 'terraform init'
-                sh 'terraform get'
-                sh 'terraform plan'
             }
         }
-        stage('Apply') {
+        stage('Get') {
             steps {
-                sh "terraform apply --auto-approve"
+                sh 'terraform get'
+            }
+        }
+        stage('Plan') {
+            steps {
+                sh 'terraform plan'
             }
         }
     }
