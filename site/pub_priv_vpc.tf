@@ -31,8 +31,8 @@ output "vpc_id" {
 #
 resource "aws_instance" "nat" {
   ami = "ami-75ae8245" # this is a special ami preconfigured to do NAT
-  availability_zone = "${element(var.availability_zones, 0)}"
-  instance_type = "t2.small"
+  availability_zone = element(var.availability_zones, 0)
+  instance_type = "t2.micro"
   key_name = "${var.key_name}"
   security_groups = ["${aws_security_group.nat.id}"]
   subnet_id = "${aws_subnet.demo_public.id}"
